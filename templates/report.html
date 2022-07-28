@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Title</title>
+        <style type="text/css">
+            body {
+                font-weight: 100;
+                font-size: 12px;
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;  
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+        </style>
+    </head>
+    <body>
+        <div class='wrapper'>
+            <div class='header'>
+                <p class='title'>Laporan Penjualan</p>
+            </div>
+        <div>
+            <div class='details'>
+                Id Report : {{ running_id }}<br/>
+                Email Penerima : {{ email_penerima }}<br/>
+                Kode Cabang : {{ cabang }}<br/>
+                Tanggal Dibuat : {{ today }}<br>
+                <!-- Format Lampiran : {{ judul_format.periode }}<br/> -->
+                <hr class='hrItem' />
+            </div>
+        </div>
+        <div class="body-informasi">
+            <table id="table-info">
+                <tr>
+                    <th scope="col">ID Transaksi</th>
+                    <th scope="col">Kode Cabang</th>
+                    <th scope="col">Tanggal</th>
+                    <th scope="col">Wholesale</th>
+                    <th scope="col">Ritel</th>
+                    <th scope="col">Mikro</th>
+                    <th scope="col">Syariah</th>
+                    <th scope="col">Digital</th>
+                    <th scope="col">Total</th>
+                </tr>
+                {% for a in detail_transaksi %}
+                {% if a.kode_cabang == cabang %}
+                {% load l10n %}
+                <tr>
+                    <td style="text-align:center;margin-bottom: 13px;">{{ a.id_transaksi }}</td>
+                    <td style="text-align:center;margin-bottom: 13px;">{{ a.kode_cabang  }}</td>
+                    <td style="text-align:center;margin-bottom: 13px;">{{ a.tanggal_transaksi }}</td>
+                    <td style="text-align:center;margin-bottom: 13px;">{{ a.wholesale }}</td>
+                    <td style="text-align:center;margin-bottom: 13px;">{{ a.ritel }}</td>
+                    <td style="text-align:center;margin-bottom: 13px;">{{ a.mikro }}</td>
+                    <td style="text-align:center;margin-bottom: 13px;">{{ a.syariah}}</td>
+                    <td style="text-align:center;margin-bottom: 13px;">{{ a.digital}}</td>
+                    <td style="text-align:center;margin-bottom: 13px;">{{ a.total_harga}}</td>
+                </tr>
+                {%endif%}
+                {%endfor%}
+            </table>
+            <!-- <div>
+                <hr class='hrItem' />
+                {% for test in trunct_month %}
+                {% load l10n %}
+                    {%if test.kode_cabang == cabang%}
+                        <h6>Total Penjualan bulan - {{ test.month|date:"M/Y" }} : Rp.{{ test.c | localize }}</h6>
+                    {%endif%}
+                {%endfor%}
+            </div> -->
+        </div>
+        <div>
+            <hr class='hrItem' />
+            {% for sumTransaksi in total_harga %}
+            {% load l10n %}
+                <h6>
+                    {%if sumTransaksi.kode_cabang == cabang%}
+                        Total Harga Penjualan Keseluruhan: Rp.{{ sumTransaksi.total_harga | localize }}
+                    {%endif%}
+                </h6>
+            {% endfor %}
+        </div>
+    </body>
+</html>
+
+
+

@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Title</title>
+        <style type="text/css">
+            body {
+                font-weight: 100;
+                font-size: 12px;
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;  
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+        </style>
+    </head>
+    <body>
+        <div class='wrapper'>
+            <div class='header'>
+                <p class='title'>Laporan Produktivitas Cabang</p>
+            </div>
+        <div>
+            <div class='details'>
+                Id Report : {{ running_id }}<br/>
+                Tanggal : {{ today }}<br/>
+                Produktivitas pada tanggal : {{ enddate }} - {{ startdate }}
+                <hr class='hrItem' />
+            </div>
+        </div>
+        <!-- Deklarasi waktu pengiriman -- tanggal saat ini -->
+        <div class="body-informasi">
+            <table id="table-info">
+                <tr>
+                    <th scope="col">Kode Cabang</th>
+                    <th scope="col">Total Penjualan</th>
+                </tr>
+                <tr>
+                <!-- Membuat nilai dari pagination -->
+                {% for sumTransaksi in total_harga %}
+                    {% load l10n %}
+                    <td style="text-align:center">
+                        {{ sumTransaksi.kode_cabang }}
+                    </td>
+                    <td style="text-align:center">Rp.{{ sumTransaksi.total_harga | localize }}</td>
+                </tr>
+                {%endfor%}
+            </table>
+        </div> 
+        <hr class='hrItem' />
+        <!-- {% for maxvalue in max_value %}
+            <p>Maka nilai produktivitas paling tinggi terdapat pada cabang, {{ maxvalue }} </p>
+        {%endfor%} -->
+    </body>
+</html>
+
+
+

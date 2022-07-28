@@ -1,0 +1,21 @@
+body{
+    margin : 25px 60px 25px 60px !important;
+    font-family: verdana, arial, helvetica !important;
+    /* background-color: blue; */
+}
+
+li.link-header {
+    list-style: none;
+    margin-left: 20px;
+    display: inline-block;
+    font-size: 14px;
+}
+
+ul.nav-header {
+    display: flex;
+}
+
+nav.nav {
+    display: flex;
+    justify-content: space-between;
+}
